@@ -119,3 +119,62 @@ Parameter | Description | Example
 ------------ | ------------- | -------------
 nonce | the incremental integer | UNIX Timestamp
 signature | the parameter's HMAC signature | HEX Format
+
+Example: `GET https://stakecube.io/api/v2/user/account?nonce=123&signature=xxx`
+
+---
+
+### My Trades
+> Returns a list of your last trades in a selected market, descending by timestamp, you may set a custom limit to the amount of returned trades, for example: `market=SCC_BTC&limit=100` returns your last 100 trades on the SCC_BTC market.
+- Endpoint: `/exchange/spot/myTrades`
+- Type: `GET`
+
+Parameter | Description | Example
+------------ | ------------- | -------------
+market | the chosen market pair | SCC_BTC
+limit | the maximum trades to return | 100
+nonce | the incremental integer | UNIX Timestamp
+signature | the parameter's HMAC signature | HEX Format
+
+**Note:** `limit` can be left empty and/or removed completely from the query, which will use `100` as the default limit.
+
+Example: `GET https://stakecube.io/api/v2/exchange/spot/myTrades?market=SCC_BTC&limit=100&nonce=123&signature=xxx`
+
+---
+
+### Order
+> Creates an exchange limit order on the chosen market, side, price and amount, for example: `market=SCC_BTC&side=BUY&price=0.00010000&amount=10` would buy 10 SCC with BTC at a price of 10k sats per SCC.
+- Endpoint: `/exchange/spot/order`
+- Type: `POST`
+
+Parameter | Description | Example
+------------ | ------------- | -------------
+market | the chosen market pair | SCC_BTC
+side | the market side to place the order | `BUY` or `SELL`
+price | the price in the Base coin | `0.00010000` (BTC)
+amount | the amount in the Market coin | `10` (SCC)
+nonce | the incremental integer | UNIX Timestamp
+signature | the parameter's HMAC signature | HEX Format
+
+**Note:** The `side` must be in full caps, e.g: `BUY` or `SELL`, not `buy` or `sell`.
+
+Example: `POST https://stakecube.io/api/v2/exchange/spot/order`
+
+POST Body: `market=SCC_BTC&side=BUY&price=0.00010000&amount=10&nonce=123&signature=xxx`
+
+---
+
+### Cancel All
+> Cancels all orders in a chosen market pair, e.g: `market=SCC_BTC` will cancel ALL limit orders on the SCC_BTC market pair.
+- Endpoint: `/exchange/spot/cancelAll`
+- Type: `POST`
+
+Parameter | Description | Example
+------------ | ------------- | -------------
+market | the chosen market pair | SCC_BTC
+nonce | the incremental integer | UNIX Timestamp
+signature | the parameter's HMAC signature | HEX Format
+
+Example: `POST https://stakecube.io/api/v2/exchange/spot/cancelAll`
+
+POST Body: `market=SCC_BTC&nonce=123&signature=xxx`
