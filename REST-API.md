@@ -14,7 +14,7 @@ For example; `GET https://stakecube.io/api/v2/exchange/spot/markets?base=BTC`
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-ticker | a coin's ticker | SCC
+(required) ticker | a coin's ticker | SCC
 
 Example: `GET https://stakecube.io/api/v2/exchange/spot/arbitrageInfo?ticker=SCC`
 
@@ -26,8 +26,8 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/arbitrageInfo?ticker=SCC
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-base | a base-coin's ticker | BTC
-orderBy | the list's ordering | `volume` or `change`
+(required) base | a base-coin's ticker | BTC
+(optional) orderBy | the list's ordering | `volume` or `change`
 
 Example: `GET https://stakecube.io/api/v2/exchange/spot/markets?ticker=BTC&orderBy=volume`
 
@@ -39,8 +39,8 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/markets?ticker=BTC&order
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-market | the chosen market pair | SCC_BTC
-interval | the chosen time-period | 1h
+(required) market | the chosen market pair | SCC_BTC
+(required) interval | the chosen time-period | 1h
 
 **NOTE:** `interval` is limited to the below options:
 - 1m
@@ -63,7 +63,7 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/ohlcData?market=SCC_BTC&
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-market | the chosen market pair | SCC_BTC
+(required) market | the chosen market pair | SCC_BTC
 (optional) side | the chosen orderbook side | `BUY` or `SELL`
 
 **NOTE:** `side` can be left empty and/or removed completely from the query, which will return BOTH sides of the orderbook (Asks + Bids).
@@ -86,7 +86,7 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/rateLimits`
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-market | the chosen market pair | SCC_BTC
+(required) market | the chosen market pair | SCC_BTC
 (optional) limit | the amount of trades to fetch | 100
 
 **NOTE:** `limit` can be left empty and/or removed completely from the query, which will return the last 100 trades.
@@ -101,8 +101,8 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/trades?market=SCC_BTC`
 For security, our private APIs require two additional `body` fields on the majority of endpoints (with a few exceptions), these fields being:
 Field | Description
 ------------ | -------------
-nonce | any integer larger than the last API call's integer (millisecond timestamp)
-signature | a HMAC signature of the full `body` contents in URL-encoded format
+(required) nonce | any integer larger than the last API call's integer (millisecond timestamp)
+(required) signature | a HMAC signature of the full `body` contents in URL-encoded format
 
 In addition, your API key should be included as a **header**, under this name: `X-API-KEY`
 
@@ -117,8 +117,8 @@ The HMAC signature is composed of all the URL-encoded parameters of your API cal
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-nonce | the incremental integer | UNIX Timestamp
-signature | the parameter's HMAC signature | HEX Format
+(required) nonce | the incremental integer | UNIX Timestamp
+(required) signature | the parameter's HMAC signature | HEX Format
 
 Example: `GET https://stakecube.io/api/v2/user/account?nonce=123&signature=xxx`
 
@@ -131,10 +131,10 @@ Example: `GET https://stakecube.io/api/v2/user/account?nonce=123&signature=xxx`
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-market | the chosen market pair | SCC_BTC
+(required) market | the chosen market pair | SCC_BTC
 (optional) limit | the maximum trades to return | 100
-nonce | the incremental integer | UNIX Timestamp
-signature | the parameter's HMAC signature | HEX Format
+(required) nonce | the incremental integer | UNIX Timestamp
+(required) signature | the parameter's HMAC signature | HEX Format
 
 **Note:** `limit` can be left empty and/or removed completely from the query, which will use `100` as the default limit.
 
@@ -149,10 +149,10 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/myTrades?market=SCC_BTC&
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-market | the chosen market pair | SCC_BTC
+(required) market | the chosen market pair | SCC_BTC
 (optional) limit | the maximum trades to return | 100
-nonce | the incremental integer | UNIX Timestamp
-signature | the parameter's HMAC signature | HEX Format
+(required) nonce | the incremental integer | UNIX Timestamp
+(required) signature | the parameter's HMAC signature | HEX Format
 
 **Note:** `limit` can be left empty and/or removed completely from the query, which will use `100` as the default limit.
 
@@ -167,12 +167,12 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/myOrderHistory?market=SC
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-market | the chosen market pair | SCC_BTC
-side | the market side to place the order | `BUY` or `SELL`
-price | the price in the Base coin | `0.00010000` (BTC)
-amount | the amount in the Market coin | `10` (SCC)
-nonce | the incremental integer | UNIX Timestamp
-signature | the parameter's HMAC signature | HEX Format
+(required) market | the chosen market pair | SCC_BTC
+(required) side | the market side to place the order | `BUY` or `SELL`
+(required) price | the price in the Base coin | `0.00010000` (BTC)
+(required) amount | the amount in the Market coin | `10` (SCC)
+(required) nonce | the incremental integer | UNIX Timestamp
+(required) signature | the parameter's HMAC signature | HEX Format
 
 **Note:** The `side` must be in full caps, e.g: `BUY` or `SELL`, not `buy` or `sell`.
 
@@ -189,9 +189,9 @@ POST Body: `market=SCC_BTC&side=BUY&price=0.00010000&amount=10&nonce=123&signatu
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-orderId | the order's unique ID | 123
-nonce | the incremental integer | UNIX Timestamp
-signature | the parameter's HMAC signature | HEX Format
+(required) orderId | the order's unique ID | 123
+(required) nonce | the incremental integer | UNIX Timestamp
+(required) signature | the parameter's HMAC signature | HEX Format
 
 Example: `POST https://stakecube.io/api/v2/exchange/spot/cancel`
 
@@ -206,9 +206,9 @@ POST Body: `orderId=123&nonce=123&signature=xxx`
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
-market | the chosen market pair | SCC_BTC
-nonce | the incremental integer | UNIX Timestamp
-signature | the parameter's HMAC signature | HEX Format
+(required) market | the chosen market pair | SCC_BTC
+(required) nonce | the incremental integer | UNIX Timestamp
+(required) signature | the parameter's HMAC signature | HEX Format
 
 Example: `POST https://stakecube.io/api/v2/exchange/spot/cancelAll`
 
