@@ -142,6 +142,24 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/myTrades?market=SCC_BTC&
 
 ---
 
+### My Order History
+> Returns a list of your historical orders of a chosen market and limit, descending by timestamp, for example: `market=SCC_BTC&limit=100` returns your last 100 orders done on the SCC_BTC market.
+- Endpoint: `/exchange/spot/myOrderHistory`
+- Type: `GET`
+
+Parameter | Description | Example
+------------ | ------------- | -------------
+market | the chosen market pair | SCC_BTC
+limit | the maximum trades to return | 100
+nonce | the incremental integer | UNIX Timestamp
+signature | the parameter's HMAC signature | HEX Format
+
+**Note:** `limit` can be left empty and/or removed completely from the query, which will use `100` as the default limit.
+
+Example: `GET https://stakecube.io/api/v2/exchange/spot/myOrderHistory?market=SCC_BTC&limit=100nonce=123&signature=xxx`
+
+---
+
 ### Order
 > Creates an exchange limit order on the chosen market, side, price and amount, for example: `market=SCC_BTC&side=BUY&price=0.00010000&amount=10` would buy 10 SCC with BTC at a price of 10k sats per SCC.
 - Endpoint: `/exchange/spot/order`
@@ -161,6 +179,23 @@ signature | the parameter's HMAC signature | HEX Format
 Example: `POST https://stakecube.io/api/v2/exchange/spot/order`
 
 POST Body: `market=SCC_BTC&side=BUY&price=0.00010000&amount=10&nonce=123&signature=xxx`
+
+---
+
+### Cancel
+> Cancels an order by it's unique ID, for example; You place an order, it's returned ID is 123, you then cancel with the parameters: `orderId=123` - the order is cancelled and removed from it's market.
+- Endpoint: `/exchange/spot/cancel`
+- Type: `POST`
+
+Parameter | Description | Example
+------------ | ------------- | -------------
+orderId | the order's unique ID | 123
+nonce | the incremental integer | UNIX Timestamp
+signature | the parameter's HMAC signature | HEX Format
+
+Example: `POST https://stakecube.io/api/v2/exchange/spot/cancel`
+
+POST Body: `orderId=123&nonce=123&signature=xxx`
 
 ---
 
