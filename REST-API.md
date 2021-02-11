@@ -21,14 +21,15 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/arbitrageInfo?ticker=SCC
 ---
 
 ### Markets
-> Returns a list of all markets matching your Base coin, for example; `base=BTC` would return all markets paired against `BTC`.
+> Returns a list of all markets matching your Base coin, for example; `base=BTC` would return all markets paired against `BTC`, you may also add a `orderBy` parameter which allows you to customize how the list is ordered, by default the list is in alphabetical order, for example; `base=BTC&orderBy=volume` would return the list of markets by descending volume.
 - Endpoint: `/exchange/spot/markets`
 
 Parameter | Description | Example
 ------------ | ------------- | -------------
 base | a base-coin's ticker | BTC
+orderBy | the list's ordering | `volume` or `change`
 
-Example: `GET https://stakecube.io/api/v2/exchange/spot/markets?ticker=BTC`
+Example: `GET https://stakecube.io/api/v2/exchange/spot/markets?ticker=BTC&orderBy=volume`
 
 ---
 
