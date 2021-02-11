@@ -87,7 +87,7 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/rateLimits`
 Parameter | Description | Example
 ------------ | ------------- | -------------
 market | the chosen market pair | SCC_BTC
-limit | the amount of trades to fetch | 100
+(optional) limit | the amount of trades to fetch | 100
 
 **NOTE:** `limit` can be left empty and/or removed completely from the query, which will return the last 100 trades.
 
@@ -132,7 +132,7 @@ Example: `GET https://stakecube.io/api/v2/user/account?nonce=123&signature=xxx`
 Parameter | Description | Example
 ------------ | ------------- | -------------
 market | the chosen market pair | SCC_BTC
-limit | the maximum trades to return | 100
+(optional) limit | the maximum trades to return | 100
 nonce | the incremental integer | UNIX Timestamp
 signature | the parameter's HMAC signature | HEX Format
 
@@ -150,7 +150,7 @@ Example: `GET https://stakecube.io/api/v2/exchange/spot/myTrades?market=SCC_BTC&
 Parameter | Description | Example
 ------------ | ------------- | -------------
 market | the chosen market pair | SCC_BTC
-limit | the maximum trades to return | 100
+(optional) limit | the maximum trades to return | 100
 nonce | the incremental integer | UNIX Timestamp
 signature | the parameter's HMAC signature | HEX Format
 
